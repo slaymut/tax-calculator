@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.odealim.tax_calculator.model.Country;
 import com.odealim.tax_calculator.model.Product;
 import com.odealim.tax_calculator.repository.ProductRepository;
 
@@ -27,6 +28,15 @@ public class ProductService {
   }
 
   public Product createProduct(Product product) {
+    if (product.getCountry() == null) {
+      throw new IllegalArgumentException("Country cannot be null");
+    }
+
+    try {
+      Country.fromString(product.getCountry().name());
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid country: " + product.getCountry());
+    }
     return productRepository.save(product);
   }
   

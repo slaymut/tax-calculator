@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.odealim.tax_calculator.model.Country;
 import com.odealim.tax_calculator.model.Product;
 import com.odealim.tax_calculator.service.ProductService;
 
@@ -40,11 +39,6 @@ public class ProductController {
   
   @PostMapping
   public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
-    try {
-      Country.fromString(product.getCountry().name());
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Invalid country: " + product.getCountry());
-    }
     Product createdProduct = productService.createProduct(product);
     return ResponseEntity.ok(createdProduct);
   }
