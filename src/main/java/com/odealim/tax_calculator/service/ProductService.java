@@ -1,5 +1,6 @@
 package com.odealim.tax_calculator.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import lombok.AllArgsConstructor;
 public class ProductService {
 
   private final ProductRepository productRepository;
-  
+  private final TaxService taxService;
 
   public List<Product> getAllProducts() {
     return productRepository.findAll();
@@ -32,5 +33,10 @@ public class ProductService {
   public void deleteProduct(Long id) throws Exception {
     Product product = getProductById(id);
     productRepository.delete(product);
+  }
+
+  public BigDecimal calculateTax(Long id) throws Exception {
+    Product product = getProductById(id);
+    return taxService.calculateTax(product);
   }
 }
