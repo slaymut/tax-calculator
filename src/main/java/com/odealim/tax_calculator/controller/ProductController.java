@@ -20,8 +20,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 
-
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/products")
