@@ -34,7 +34,7 @@ public class ProductController {
   @GetMapping("/{id}")
   public ResponseEntity<Product> getProductById(@PathVariable Long id) throws Exception {
     Product product = productService.getProductById(id);
-      return ResponseEntity.ok(product);
+    return ResponseEntity.ok(product);
   }
   
   @PostMapping
